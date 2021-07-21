@@ -71,12 +71,52 @@ public class Controller {
 
             //end of processing transactions and loading them into program memory
             this.transactions = transactions;
-
-            System.out.println("Size" + this.transactions.size());
         } catch (Exception e) {
             System.out.println("File not found");
             throw new Exception("Exception occured");
         }
+    }
+
+    public double[] calculateTotals( String selectedAccountID, LocalDateTime startTime, LocalDateTime endTime){
+        ArrayList<Transaction> transactions = this.transactions;
+        // Initialize counter and summation variable
+        double sum = 0;
+        int count = 0;
+
+        for (int i = 0; i<transactions.size(); i++) {
+            Transaction t = transactions.get(i);
+            //Check if the given account is in from account and transaction is happening within concerned time period.
+            if (t.getFromAccountID().compareTo(selectedAccountID)==0 && t.getCreatedAt().isAfter(startTime) && t.getCreatedAt().isBefore(endTime)){
+                //If yes, check only for payments and ignore reversals
+                if (t instanceof Payment) {
+                    Payment p = (Payment) t;
+                    //If yes, ignore all payments that have a reversal and pick only those that dont have a reversal.
+                    if (p.isHasReversal()==false) {
+                        //Since the account is in from account it goes to negative balance.
+                        sum -= p.getAmount();
+                        count++;
+                    }
+                }
+            }
+            //Check if the given account is in to account and transaction is happening within concerned time period.
+            else if (t.getToAccoundID().compareTo(selectedAccountID)==0 && t.getCreatedAt().isAfter(startTime) && t.getCreatedAt().isBefore(endTime)){
+                //If yes, check only for payments and ignore reversals
+                if (t instanceof Payment) {
+                    Payment p = (Payment) t;
+                    //If yes, ignore all payments that have a reversal and pick only those that dont have a reversal.
+                    if (p.isHasReversal()==false) {
+                        //Since the account is in to account it goes to positive balance.
+                        sum += p.getAmount();
+                        count++;
+                    }
+                }
+            }
+        }
+
+        System.out.println("The total amount transacted on this account between specified period is: " + sum );
+        System.out.println("The total number of transactions on this account within specified period is: " + count);
+
+        return new double[]{sum, count};
     }
 
 }
