@@ -55,6 +55,9 @@ public class Starter {
         if (endTime.isBefore(startTime)) {
             System.out.println("End time entered occurs before start time. This is invalid. Please try again.");
         }
+        else {
+            controller.calculateTotals( selectedAccountID, startTime, endTime);
+        }
 
     }
 
