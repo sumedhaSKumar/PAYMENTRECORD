@@ -86,7 +86,7 @@ public class Controller {
         for (int i = 0; i<transactions.size(); i++) {
             Transaction t = transactions.get(i);
             //Check if the given account is in from account and transaction is happening within concerned time period.
-            if (t.getFromAccountID().compareTo(selectedAccountID)==0 && t.getCreatedAt().isAfter(startTime) && t.getCreatedAt().isBefore(endTime)){
+            if (t.getFromAccountID().compareTo(selectedAccountID)==0 && (t.getCreatedAt().isAfter(startTime) || t.getCreatedAt().isEqual(startTime)) && (t.getCreatedAt().isBefore(endTime) || t.getCreatedAt().isEqual(endTime))){
                 //If yes, check only for payments and ignore reversals
                 if (t instanceof Payment) {
                     Payment p = (Payment) t;
@@ -99,7 +99,7 @@ public class Controller {
                 }
             }
             //Check if the given account is in to account and transaction is happening within concerned time period.
-            else if (t.getToAccoundID().compareTo(selectedAccountID)==0 && t.getCreatedAt().isAfter(startTime) && t.getCreatedAt().isBefore(endTime)){
+            else if (t.getToAccoundID().compareTo(selectedAccountID)==0 && (t.getCreatedAt().isAfter(startTime) || t.getCreatedAt().isEqual(startTime)) && (t.getCreatedAt().isBefore(endTime) || t.getCreatedAt().isEqual(endTime))){
                 //If yes, check only for payments and ignore reversals
                 if (t instanceof Payment) {
                     Payment p = (Payment) t;
