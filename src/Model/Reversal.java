@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Transaction;
-
 import java.time.LocalDateTime;
 
 public class Reversal extends Transaction {
