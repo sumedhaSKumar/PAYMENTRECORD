@@ -15,6 +15,18 @@ public class Controller {
         this.transactions = new ArrayList<>();
     }
 
+    //Check for existing accounts
+    public boolean accountExists(String accountID) {
+        //loop through each transaction
+        for (int i = 0; i<this.transactions.size(); i++){
+            Transaction t = transactions.get(i);
+            //check if the input account id is same as to or from account id in each transaction
+            if ((t.getToAccoundID().compareTo(accountID)) == 0 || (t.getFromAccountID().compareTo(accountID)==0))
+                return true;
+        }
+        return false;
+    }
+
     public void processCSVData(String filePath, DateTimeFormatter format)throws Exception {
         ArrayList<Transaction> transactions = new ArrayList<>();
         //Open the file at specified location in read mode
