@@ -19,6 +19,12 @@ This folder contains Java bytecode that can be executed on the JVM and can be ru
 3. javac *.java
 3. java Starter
  By following above steps the program starts executing.
+ 
+ Once the program starts executing the below message is printed:
+ **Please enter the file path with file name exactly**
+ Provide the path for CSV file, a CSV file has been added in JAVA.CLASSES folder called **transactions.csv** 
+ Then enter the start time and end time one at a time.
+
 
 **Design Model**
 
