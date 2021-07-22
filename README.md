@@ -15,9 +15,7 @@ There needs to be a JDK 1.8 or higher version install to build and run this prog
 This folder contains Java bytecode that can be executed on the JVM and can be run directly on CMD: Follow the below commands
 1. Download the JAVA.CLASSES folder
 1. open CMD
-2. Type as below
-3. javac *.java
-3. java Starter
+2. Type **java Starter**
  By following above steps the program starts executing.
  
  Once the program starts executing the below message is printed:
